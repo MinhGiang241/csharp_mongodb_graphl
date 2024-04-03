@@ -23,11 +23,11 @@ WebApplication app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     _ = app.UseDeveloperExceptionPage();
-    _ = app.UsePlayground(new PlaygroundOptions { Path = "/playground" });
+    _ = app.UsePlayground(new PlaygroundOptions { QueryPath = "/api", Path = "/playground" });
 }
 
 app.UseHttpsRedirection();
-app.MapGraphQL();
+app.MapGraphQL("/api");
 
 app.UseAuthorization();
 
