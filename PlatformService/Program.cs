@@ -22,13 +22,16 @@ WebApplication app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    _ = app.UseDeveloperExceptionPage();
-    _ = app.UsePlayground(new PlaygroundOptions { QueryPath = "/api", Path = "/playground" });
+    /* _ = app.UseDeveloperExceptionPage(); */
+    _ = app.UsePlayground();
 }
 
 app.UseHttpsRedirection();
-app.MapGraphQL("/api");
-
+app.UseRouting()
+    .UseEndpoints(endpoints =>
+    {
+        _ = endpoints.MapGraphQL();
+    });
 app.UseAuthorization();
 
 app.MapControllers();
